@@ -27,3 +27,17 @@ def addContactos():
         db.session.commit()
         db.session.close()
         return jsonify(data)
+    
+@contact.route('/update',methods=['POST'])
+def updateContactos():
+    if request.method=='POST':
+        data=()
+        body=request.get_json()
+        id=body['id']
+        contacto=Contact.query.get(id)
+        contacto.fullname=body['fullname']
+        contacto.email=body['email']
+        contacto.phone=body['phone']
+        db.session.commit()
+        db.session.close()
+        return jsonify(data)
