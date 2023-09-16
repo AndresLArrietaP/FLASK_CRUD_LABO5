@@ -41,3 +41,15 @@ def updateContactos():
         db.session.commit()
         db.session.close()
         return jsonify(data)
+    
+@contact.route('/delete',methods=['POST'])
+def deleteContactos():
+    if request.method=='POST':
+        data=()
+        body=request.get_json()
+        id=body['id']
+        contacto=Contact.query.get(id)
+        db.session.delete(contacto)
+        db.session.commit()
+        db.session.close()
+        return jsonify(data)
